@@ -40,10 +40,12 @@ function initTenureOverrides(){
   });
 }
 
-window.addEventListener('DOMContentLoaded',()=>{
+function initApp(){
   initTenureOverrides();
-  $('advancedToggle').addEventListener('change',e=>showAdvancedPanel(e.target.checked));
-  $('calcBtn').addEventListener('click',()=>{
+  const adv = $('advancedToggle');
+  if (adv) adv.addEventListener('change',e=>showAdvancedPanel(e.target.checked));
+  const calc = $('calcBtn');
+  if (calc) calc.addEventListener('click',()=>{
     const showroomRate = Number($('showroomRate').value) || 145000;
     const downPayment = Number($('downPayment').value) || 20000;
     const tenureInput = Number($('tenureMonths').value) || null;
@@ -71,7 +73,13 @@ window.addEventListener('DOMContentLoaded',()=>{
 
     renderResults({onRoad, loanAmount, emiList});
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 function renderResults({onRoad, loanAmount, emiList}){
   const out = $('results');
