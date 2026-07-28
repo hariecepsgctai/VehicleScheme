@@ -25,7 +25,7 @@ jobs:
 
       - name: Prebuild Expo (generate android/)
         run: |
-          npx expo prebuild --platform android --no-interactive
+          npx expo prebuild --platform android
 
       - name: Build Android debug APK
         working-directory: android
