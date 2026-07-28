@@ -76,28 +76,30 @@ window.addEventListener('DOMContentLoaded',()=>{
 function renderResults({onRoad, loanAmount, emiList}){
   const out = $('results');
   out.innerHTML = '';
+  const fmt = new Intl.NumberFormat('en-IN');
+
   const b = document.createElement('div'); b.className='result-block';
   b.innerHTML = `<h3>On-Road Breakdown</h3>
-    <div>Margin Money: ${Math.round(onRoad.marginMoney)}</div>
-    <div>Net Showroom Cost: ${Math.round(onRoad.netShowroomCost)}</div>
-    <div>Processing Fee: ${Math.round(onRoad.processingFee)}</div>
-    <div>GST: ${Math.round(onRoad.gst)}</div>
-    <div>Total On-Road: ${Math.round(onRoad.totalOnRoad)}</div>
-    <div>Down Payment: ${Math.round(document.getElementById('downPayment').value||20000)}</div>
-    <div style="font-weight:600">Net Financed Loan: ${Math.round(loanAmount)}</div>
+    <div>Margin Money: ${fmt.format(Math.round(onRoad.marginMoney))}</div>
+    <div>Net Showroom Cost: ${fmt.format(Math.round(onRoad.netShowroomCost))}</div>
+    <div>Processing Fee: ${fmt.format(Math.round(onRoad.processingFee))}</div>
+    <div>GST: ${fmt.format(Math.round(onRoad.gst))}</div>
+    <div>Total On-Road: ${fmt.format(Math.round(onRoad.totalOnRoad))}</div>
+    <div>Down Payment: ${fmt.format(Math.round(document.getElementById('downPayment').value||20000))}</div>
+    <div style="font-weight:600">Net Financed Loan: ${fmt.format(Math.round(loanAmount))}</div>
   `;
   out.appendChild(b);
 
   emiList.forEach(e=>{
     const div = document.createElement('div'); div.className='result-block';
     div.innerHTML = `<h4>Tenure ${e.tenureMonths} months</h4>
-      <div>Monthly Principal: ${e.principalMonthly.toFixed(2)}</div>
+      <div>Monthly Principal: ${fmt.format(Number(e.principalMonthly.toFixed(2)))}</div>
       <div>Interest %: ${e.interest}</div>
       <div>One-off %: ${e.oneOff}</div>
-      <div>Interest Amount (monthly): ${e.interestAmount.toFixed(2)}</div>
-      <div>Charges (monthly): ${e.charges.toFixed(2)}</div>
-      <div style="font-weight:600">EMI (monthly): ${e.emi.toFixed(2)}</div>
-      <div>Total Payable: ${e.totalPayable.toFixed(2)}</div>
+      <div>Interest Amount (monthly): ${fmt.format(Number(e.interestAmount.toFixed(2)))}</div>
+      <div>Charges (monthly): ${fmt.format(Number(e.charges.toFixed(2)))}</div>
+      <div style="font-weight:600">EMI (monthly): ${fmt.format(Number(e.emi.toFixed(2)))}</div>
+      <div>Total Payable: ${fmt.format(Number(e.totalPayable.toFixed(2)))}</div>
     `;
     out.appendChild(div);
   });
