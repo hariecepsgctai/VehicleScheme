@@ -4,6 +4,12 @@
     "slug": "vehiclescheme",
     "version": "1.0.0",
     "sdkVersion": "48.0.0",
-    "platforms": ["android","ios","web"]
+    "platforms": ["android","ios","web"],
+    "android": {
+      "package": "com.hariecepsgctai.vehiclescheme"
+    },
+    "ios": {
+      "bundleIdentifier": "com.hariecepsgctai.vehiclescheme"
+    }
   }
 }
