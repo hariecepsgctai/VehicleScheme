@@ -1,0 +1,11 @@
+# Node / Expo
+node_modules/
+.expo/
+.expo-shared/
+web-build/
+
+# Misc
+.env
+.DS_Store
+npm-debug.log
+yarn-error.log
