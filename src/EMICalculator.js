@@ -17,7 +17,7 @@ export function computeOnRoadCost({showroomRate, marginPercent, processingFeePer
 }
 
 // tenureMonths -> default interest and one-off mapping
-const tenureDefaults = {
+export const tenureDefaults = {
   12: {interest: 11.0, oneOff: 1.0},
   18: {interest: 11.5, oneOff: 1.5},
   24: {interest: 12.0, oneOff: 2.0},
@@ -45,4 +45,12 @@ export function calculateEMI({loanAmount, tenureMonths, interestPercent, oneOffP
     emi,
     totalPayable: emi * tenureMonths
   };
+}
+
+export function calculateEMIsForTenures({loanAmount, tenures = [12,18,24,36], overrides = {}}){
+  // returns array of EMI breakdowns for each tenure
+  return tenures.map(t => {
+    const ov = overrides[t] || {};
+    return calculateEMI({loanAmount, tenureMonths: t, interestPercent: ov.interest, oneOffPercent: ov.oneOff});
+  });
 }
