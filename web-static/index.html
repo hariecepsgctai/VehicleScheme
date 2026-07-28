@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VehicleScheme — EMI Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>VehicleScheme — EMI Calculator</h1>
+
+    <label>Showroom Rate (leave empty for example)</label>
+    <input id="showroomRate" type="number" placeholder="e.g. 145000">
+
+    <label>Down Payment (leave empty for example)</label>
+    <input id="downPayment" type="number" placeholder="e.g. 20000">
+
+    <label>Tenure (months) — leave empty to compute 12,18,24,36</label>
+    <input id="tenureMonths" type="number" placeholder="12">
+
+    <div class="row">
+      <label>Advanced</label>
+      <input id="advancedToggle" type="checkbox">
+    </div>
+
+    <div id="advancedPanel" class="advanced">
+      <h3>General Charges</h3>
+      <label>Margin Money %</label>
+      <input id="marginPercent" type="number" value="10">
+      <label>Processing Fee %</label>
+      <input id="processingFeePercent" type="number" value="2.5">
+      <label>GST % on Processing Fee</label>
+      <input id="gstPercent" type="number" value="18">
+      <label>Documentation Charges</label>
+      <input id="docCharges" type="number" value="500">
+      <label>Showroom Accessories</label>
+      <input id="accessories" type="number" value="4000">
+      <label>Insurance / Bundle Policy</label>
+      <input id="insurance" type="number" value="1700">
+
+      <h3>Per-tenure rates</h3>
+      <div id="tenureOverrides"></div>
+    </div>
+
+    <button id="calcBtn">Calculate EMI</button>
+
+    <section id="results"></section>
+  </main>
+  <script src="emicalc.js"></script>
+</body>
+</html>
