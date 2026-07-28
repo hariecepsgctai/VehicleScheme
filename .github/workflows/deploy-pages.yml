@@ -21,10 +21,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git clone --branch gh-pages --single-branch https://github.com/${{ github.repository }} gh-pages || git clone https://github.com/${{ github.repository }} gh-pages
-          rm -rf gh-pages/*
-          cp -R web-static/* gh-pages/
-          cd gh-pages
-          git add --all
+          git fetch origin
+          if git rev-parse --verify gh-pages >/dev/null 2>&1; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+          fi
+          git rm -rf .
+          cp -R web-static/. .
+          git add -A
           git commit -m "Deploy web-static (GitHub Actions)" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          git push origin gh-pages --force
